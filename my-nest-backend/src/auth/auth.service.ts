@@ -19,6 +19,12 @@ export class AuthService {
             where: { email: email }
         });
     }
+
+    async findOneById(id: number): Promise<User> {
+        return await this.userRepository.findOne({
+            where: { id: id }
+        });
+    }
 }
 
 // service interacts with the database

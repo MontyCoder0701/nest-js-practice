@@ -1,11 +1,18 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, BadRequestException, Res, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
+import { JwtService } from '@nestjs/jwt';
+import { Request, Response } from 'express';
 
 @Controller()
 export class AuthController {
-    constructor(private authService: AuthService) { }
+    constructor(
+        private authService: AuthService,
+        private jwtService: JwtService,
+    ) {
+
+    }
 
     @Post('register')
     async register(@Body() body: RegisterDto) {
@@ -22,7 +29,8 @@ export class AuthController {
     @Post('login')
     async login(
         @Body('email') email: string,
-        @Body('password') password: string
+        @Body('password') password: string,
+        @Res({ passthrough: true }) response: Response,
     ) {
         const user = await this.authService.findOneByEmail(email);
 
@@ -34,11 +42,21 @@ export class AuthController {
             throw new BadRequestException('Wrong password!');
         }
 
+        const jtw = await this.jwtService.signAsync({ id: user.id });
+        response.cookie('jwt', jtw, { httpOnly: true });
+
         return user;
     }
+
+    @Get('user')
+    async user(@Req() request: Request) {
+        const cookie = request.cookies['jwt'];
+        const data = await this.jwtService.verifyAsync(cookie);
+        return this.authService.findOneById(data.id);
+    }
+
 }
 
 // controller handles the request and response
-// constructor  injects the service into the controller 
-// controller uses the service to create a user in the database
-// controller uses the dto to validate the request body
+// constructor injects the service into the controller  
+// controller uses the AuthService (for database manipulation) and JwtService (for token)
