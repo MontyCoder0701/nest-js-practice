@@ -8,9 +8,12 @@ export class AuthInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
-    const jwt = request.cookies['jwt'];
-
-    if (!this.jtwService.verify(jwt)) {
+    try {
+      const jwt = request.cookies['jwt'];
+      if (!this.jtwService.verify(jwt)) {
+        throw new UnauthorizedException('Invalid token!');
+      }
+    } catch (e) {
       throw new UnauthorizedException('Invalid token!');
     }
 

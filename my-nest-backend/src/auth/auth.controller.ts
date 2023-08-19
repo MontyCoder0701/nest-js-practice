@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 import { AuthInterceptor } from './auth.interceptor';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller()
 export class AuthController {
     constructor(
@@ -49,12 +50,21 @@ export class AuthController {
         return user;
     }
 
-    @UseInterceptors(ClassSerializerInterceptor, AuthInterceptor)
+    @UseInterceptors(AuthInterceptor)
     @Get('user')
     async user(@Req() request: Request) {
         const cookie = request.cookies['jwt'];
         const data = await this.jwtService.verifyAsync(cookie);
         return this.authService.findOneById(data.id);
+    }
+
+    @UseInterceptors(AuthInterceptor)
+    @Post('logout')
+    async logout(@Res({ passthrough: true }) response: Response) {
+        response.clearCookie('jwt');
+        return {
+            message: 'success'
+        };
     }
 
 }
