@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { HelloController } from './hello-controller/hello-controller';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ResetModule } from './reset/reset.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -22,6 +23,7 @@ const password = process.env.DB_PASSWORD;
       autoLoadEntities: true,
       synchronize: true,
     }),
+    ResetModule,
   ],
   controllers: [AppController, HelloController],
   providers: [AppService],
