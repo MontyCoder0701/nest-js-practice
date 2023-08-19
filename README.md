@@ -15,3 +15,17 @@ Backend will be running on <http://localhost:3000>
 npm run lint
 npm run format
 ```
+
+## Setting up email sending feature
+
+``` bash
+brew update && brew install mailhog
+```
+
+``` bash
+mailhog
+```
+
+```bash
+npm install --save @nestjs-modules/mailer nodemailer
+```
