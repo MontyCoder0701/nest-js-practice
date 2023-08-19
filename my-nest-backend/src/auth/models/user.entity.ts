@@ -17,3 +17,5 @@ export class UserEntity {
     @Column()
     password: string;
 }
+
+// the entity is used to define the shape of the data that will be stored in the database

@@ -17,3 +17,5 @@ export class RegisterDto {
     @IsNotEmpty()
     password_confirm: string;
 }
+
+// the dto is used to validate the request body

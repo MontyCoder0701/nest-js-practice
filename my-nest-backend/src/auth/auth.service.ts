@@ -13,4 +13,15 @@ export class AuthService {
     async create(user: User): Promise<User> {
         return await this.userRepository.save(user);
     }
+
+    async findOneByEmail(email: string): Promise<User> {
+        return await this.userRepository.findOne({
+            where: { email: email }
+        });
+    }
 }
+
+// service interacts with the database
+// constructor injects the database repository into the service
+// uses interface that defines the user object
+// findOneByEmail method uses the repository to find a user by email
