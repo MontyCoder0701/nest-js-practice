@@ -15,6 +15,12 @@ export class ResetService {
         return await this.resetRepo.save(reset);
     }
 
+    async findOneByToken(token: string) {
+        return await this.resetRepo.findOne({
+            where: { token: token }
+        });
+    }
+
 }
 
 // service manipulates the actual data to be stored in the database

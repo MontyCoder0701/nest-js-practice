@@ -25,6 +25,10 @@ export class AuthService {
             where: { id: id }
         });
     }
+
+    async update(id: number, data): Promise<any> {
+        return await this.userRepository.update(id, data);
+    }
 }
 
 // service interacts with the database
