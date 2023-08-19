@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, BadRequestException, Res, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, BadRequestException, Res, Req, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
+import { AuthInterceptor } from './auth.interceptor';
 
 @Controller()
 export class AuthController {
@@ -48,6 +49,7 @@ export class AuthController {
         return user;
     }
 
+    @UseInterceptors(ClassSerializerInterceptor, AuthInterceptor)
     @Get('user')
     async user(@Req() request: Request) {
         const cookie = request.cookies['jwt'];
@@ -60,3 +62,4 @@ export class AuthController {
 // controller handles the request and response
 // constructor injects the service into the controller  
 // controller uses the AuthService (for database manipulation) and JwtService (for token)
+// interceptor is used to intercept the request and verify the token
