@@ -10,7 +10,6 @@ export class ResetEntity {
 
     @Column()
     token: string;
-
 }
 
 // entity defines how the data goes in the actual DB like a schema (model)

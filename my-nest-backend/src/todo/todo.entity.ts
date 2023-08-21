@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    ManyToOne,
+    JoinColumn,
+} from 'typeorm';
 import { UserEntity } from '../auth/models/user.entity';
 
 @Entity('todos')
@@ -15,7 +21,7 @@ export class TodoEntity {
     @Column({ type: 'date' })
     date: Date;
 
-    @ManyToOne(() => UserEntity, user => user.todos)
+    @ManyToOne(() => UserEntity, (user) => user.todos)
     @JoinColumn({ name: 'user_id' })
     user: UserEntity;
 }

@@ -7,5 +7,5 @@ export interface User {
 }
 
 // the interface is used to define the shape of the data that will be passed around in the application
-// the ? indicates that the property is optional 
+// the ? indicates that the property is optional
 // it is ? because the id is not available when creating a new user

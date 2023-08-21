@@ -1,11 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Req,
+    UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from 'src/auth/auth.service';
 import { TodoDto } from './todo.dto';
 import { TodoService } from './todo.service';
-
 
 @UseGuards(AuthGuard)
 @Controller('todo')
@@ -14,7 +22,7 @@ export class TodoController {
         private authService: AuthService,
         private jwtService: JwtService,
         private todoService: TodoService,
-    ) { }
+    ) {}
 
     @Post('create')
     async create(@Body() body: TodoDto, @Req() request: Request) {

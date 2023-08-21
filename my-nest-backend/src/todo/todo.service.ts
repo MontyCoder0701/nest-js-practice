@@ -8,8 +8,9 @@ import { User } from 'src/auth/models/user.interface';
 @Injectable()
 export class TodoService {
     constructor(
-        @InjectRepository(TodoEntity) private readonly todoRepository: Repository<TodoEntity>
-    ) { }
+        @InjectRepository(TodoEntity)
+        private readonly todoRepository: Repository<TodoEntity>,
+    ) {}
 
     async create(todo: Todo, user: User): Promise<Todo> {
         todo.user = user;
@@ -20,7 +21,7 @@ export class TodoService {
     async readAll(user: User): Promise<Todo[]> {
         const todos = await this.todoRepository.find({
             where: { user: user },
-            order: { date: 'DESC' }
+            order: { date: 'DESC' },
         });
         return todos;
     }

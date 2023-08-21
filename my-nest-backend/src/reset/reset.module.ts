@@ -21,9 +21,9 @@ import { AuthModule } from 'src/auth/auth.module';
         AuthModule,
     ],
     providers: [ResetService],
-    controllers: [ResetController]
+    controllers: [ResetController],
 })
-export class ResetModule { }
+export class ResetModule {}
 
 // module is a collection of controllers, entity, and services
 // typeorm module is imported to be able to use the repository

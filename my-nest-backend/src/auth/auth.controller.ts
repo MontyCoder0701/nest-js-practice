@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, BadRequestException, Res, Req, UseInterceptors, ClassSerializerInterceptor, UseGuards } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Body,
+    BadRequestException,
+    Res,
+    Req,
+    UseInterceptors,
+    ClassSerializerInterceptor,
+    UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
@@ -12,13 +23,10 @@ export class AuthController {
     constructor(
         private authService: AuthService,
         private jwtService: JwtService,
-    ) {
-
-    }
+    ) {}
 
     @Post('register')
     async register(@Body() body: RegisterDto) {
-
         if (body.password !== body.password_confirm) {
             throw new BadRequestException('Password does not match!');
         }
@@ -40,7 +48,7 @@ export class AuthController {
             throw new BadRequestException('Email does not exist!');
         }
 
-        if (!await bcrypt.compare(password, user.password)) {
+        if (!(await bcrypt.compare(password, user.password))) {
             throw new BadRequestException('Wrong password!');
         }
 
@@ -63,13 +71,12 @@ export class AuthController {
     async logout(@Res({ passthrough: true }) response: Response) {
         response.clearCookie('jwt');
         return {
-            message: 'success'
+            message: 'success',
         };
     }
-
 }
 
 // controller handles the request and response
-// constructor injects the service into the controller  
+// constructor injects the service into the controller
 // controller uses the AuthService (for database manipulation) and JwtService (for token)
 // interceptor is used to intercept the request and verify the token

@@ -7,8 +7,9 @@ import { User } from './models/user.interface';
 @Injectable()
 export class AuthService {
     constructor(
-        @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
-    ) { }
+        @InjectRepository(UserEntity)
+        private readonly userRepository: Repository<UserEntity>,
+    ) {}
 
     async create(user: User): Promise<User> {
         return await this.userRepository.save(user);
@@ -16,13 +17,13 @@ export class AuthService {
 
     async findOneByEmail(email: string): Promise<User> {
         return await this.userRepository.findOne({
-            where: { email: email }
+            where: { email: email },
         });
     }
 
     async findOneById(id: number): Promise<User> {
         return await this.userRepository.findOne({
-            where: { id: id }
+            where: { id: id },
         });
     }
 

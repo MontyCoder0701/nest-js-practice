@@ -1,4 +1,9 @@
-import { BadRequestException, Controller, Inject, forwardRef } from '@nestjs/common';
+import {
+    BadRequestException,
+    Controller,
+    Inject,
+    forwardRef,
+} from '@nestjs/common';
 import { Post } from '@nestjs/common';
 import { Body } from '@nestjs/common';
 import { ResetService } from './reset.service';
@@ -13,7 +18,7 @@ export class ResetController {
         private mailerService: MailerService,
         @Inject(forwardRef(() => AuthService))
         private authService: AuthService,
-    ) { }
+    ) {}
 
     @Post('forgot')
     async forgot(@Body('email') email: string) {

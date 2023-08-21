@@ -20,7 +20,7 @@ export class UserEntity {
     @Exclude()
     password: string;
 
-    @OneToMany(() => TodoEntity, todo => todo.user)
+    @OneToMany(() => TodoEntity, (todo) => todo.user)
     todos: TodoEntity[];
 }
 

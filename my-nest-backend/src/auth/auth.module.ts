@@ -10,14 +10,14 @@ import { JwtModule } from '@nestjs/jwt';
         TypeOrmModule.forFeature([UserEntity]),
         JwtModule.register({
             secret: 'secret',
-            signOptions: { expiresIn: '1d' }
+            signOptions: { expiresIn: '1d' },
         }),
     ],
     controllers: [AuthController],
     providers: [AuthService],
-    exports: [AuthService, JwtModule]
+    exports: [AuthService, JwtModule],
 })
-export class AuthModule { }
+export class AuthModule {}
 
 // import the typeorm module and the user entity
 // forfeature method registers the user entity as a repository
