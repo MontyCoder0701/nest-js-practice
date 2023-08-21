@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { HelloController } from './hello-controller/hello-controller';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ResetModule } from './reset/reset.module';
+import { TodoModule } from './todo/todo.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,8 +24,9 @@ const password = process.env.DB_PASSWORD;
       synchronize: true,
     }),
     ResetModule,
+    TodoModule,
   ],
-  controllers: [AppController, HelloController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule { }
