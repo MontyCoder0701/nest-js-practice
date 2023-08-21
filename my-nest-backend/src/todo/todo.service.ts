@@ -16,4 +16,17 @@ export class TodoService {
         const createdTodo = await this.todoRepository.save(todo);
         return createdTodo;
     }
+
+    async readAll(user: User): Promise<Todo[]> {
+        const todos = await this.todoRepository.find({
+            where: { user: user },
+            order: { date: 'DESC' }
+        });
+        return todos;
+    }
+
+    async delete(id: number): Promise<any> {
+        const deletedTodo = await this.todoRepository.delete({ id: id });
+        return deletedTodo;
+    }
 }

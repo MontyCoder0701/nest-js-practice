@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
@@ -26,9 +26,16 @@ export class TodoController {
     }
 
     @Get()
-    async user(@Req() request: Request) {
+    async readAll(@Req() request: Request) {
         const cookie = request.cookies['jwt'];
         const data = await this.jwtService.verifyAsync(cookie);
-        return this.authService.findOneById(data.id);
+        const user = await this.authService.findOneById(data.id);
+        const todos = await this.todoService.readAll(user);
+        return todos;
+    }
+
+    @Delete(':id')
+    async delete(@Param('id') id: number) {
+        return this.todoService.delete(id);
     }
 }
