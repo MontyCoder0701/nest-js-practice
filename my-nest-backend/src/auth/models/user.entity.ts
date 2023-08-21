@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { TodoEntity } from 'src/todo/todo.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -18,6 +19,9 @@ export class UserEntity {
     @Column()
     @Exclude()
     password: string;
+
+    @OneToMany(() => TodoEntity, todo => todo.user)
+    todos: TodoEntity[];
 }
 
 // the entity is used to define the shape of the data that will be stored in the database
