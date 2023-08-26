@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { TodoEntity } from './todo.entity';
 import { Todo } from './todo.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/auth/models/user.interface';
+import { User } from 'src/core/auth/models/user.interface';
 
 @Injectable()
 export class TodoService {

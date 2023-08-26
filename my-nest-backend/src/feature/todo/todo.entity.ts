@@ -5,7 +5,7 @@ import {
     ManyToOne,
     JoinColumn,
 } from 'typeorm';
-import { UserEntity } from '../auth/models/user.entity';
+import { UserEntity } from '../../core/auth/models/user.entity';
 
 @Entity('todos')
 export class TodoEntity {

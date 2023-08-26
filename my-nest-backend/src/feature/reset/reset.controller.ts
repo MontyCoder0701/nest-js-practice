@@ -8,7 +8,7 @@ import { Post } from '@nestjs/common';
 import { Body } from '@nestjs/common';
 import { ResetService } from './reset.service';
 import { MailerService } from '@nestjs-modules/mailer';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/core/auth/auth.service';
 import * as bcrypt from 'bcrypt';
 
 @Controller()

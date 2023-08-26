@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ResetModule } from './reset/reset.module';
-import { TodoModule } from './todo/todo.module';
+import { CoreModule } from './core/core.module';
+import { FeatureModule } from './feature/feature.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,7 +11,7 @@ const password = process.env.DB_PASSWORD;
 
 @Module({
     imports: [
-        AuthModule,
+        CoreModule,
         TypeOrmModule.forRoot({
             type: 'mysql',
             host: 'localhost',
@@ -23,8 +22,7 @@ const password = process.env.DB_PASSWORD;
             autoLoadEntities: true,
             synchronize: true,
         }),
-        ResetModule,
-        TodoModule,
+        FeatureModule,
     ],
     controllers: [AppController],
     providers: [AppService],

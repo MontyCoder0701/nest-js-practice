@@ -1,4 +1,4 @@
-import { User } from 'src/auth/models/user.interface';
+import { User } from 'src/core/auth/models/user.interface';
 
 export interface Todo {
     id?: number;

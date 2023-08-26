@@ -8,10 +8,10 @@ import {
     Req,
     UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/core/auth/auth.guard';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/core/auth/auth.service';
 import { TodoDto } from './todo.dto';
 import { TodoService } from './todo.service';
 
